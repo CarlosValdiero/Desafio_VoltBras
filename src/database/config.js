@@ -1,9 +1,18 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const url = `${process.env.DATABASE_CONNECTION_STRING}/stations`;
+mongoose
+	.connect(process.env.DATABASE_URL, {
+		useNewUrlParser: true
+	})
+	.then(() => {
+		console.log('successfully connected to the database');
+	})
+	.catch(err => {
+		console.log('error connecting to the database');
+		process.exit();
+	});
 
-mongoose.connect(url, { useNewUrlParser: true });
 mongoose.connection.once('open', () =>
-	console.log(`Connected to mongo at ${url}`)
+	console.log(`Connected to mongo at ${process.env.DATABASE_URL}`)
 );

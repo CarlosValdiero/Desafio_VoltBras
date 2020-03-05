@@ -23,19 +23,32 @@ Instale as dependências:
 $ yarn install ou npm install
 ```
 
-Crie um arquivo .env e adicione a url do mongoDB, no meu caso estou usando o banco no MongoDB Atlas:
+### Como testar
+
+##### Docker Compose
+
+Para iniciar a aplicação com docker compose execute no terminal o comando:
+
+```
+$ docker-compose up
+```
+
+##### Sem Docker Compose
+
+Caso você não utilize docker compose, crie um arquivo .env e adicione a url do mongoDB:
 
 ```
 DATABASE_CONNECTION_STRING =
 ```
 
-### Como testar
-
-Atráves de um terminal execute o comando para iniciar o servidor
+E tráves de um terminal execute o comando para iniciar o servidor:
+(se não utilizar o docker-compose)
 
 ```
 yarn start ou npm start
 ```
+
+##### Playground
 
 Acesse a página playground do servidor atráves da url http://localhost:4000/graphql.
 
@@ -79,6 +92,6 @@ mutation installStation {
 
 -   [ ] Adicione testes usando [Jest] ou qualquer outro framework para testes
 -   [ ] Usar Typescript
--   [ ] Coloque um docker-compose, que simplifique rodar o seu servidor e o DB
+-   [x] Coloque um docker-compose, que simplifique rodar o seu servidor e o DB
 -   [ ] Usamos [prisma](prisma.io) mas sinta-se livre para usar qualquer ORM
 -   [x] Como o dado da [Arcsecond] vem páginado, tente pegar mais de uma página(e.g. 10 páginas)
