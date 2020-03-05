@@ -16,9 +16,11 @@ class PlanetAPI extends RESTDataSource {
 
 			if (Array.isArray(response.results)) {
 				url = response.next;
+
 				const planets = response.results.filter(planet => {
 					return planet.mass !== null && planet.mass.value > 25.0;
 				});
+
 				listPlanets = listPlanets.concat(
 					planets.map(planet => this.planetReducer(planet))
 				);
@@ -30,19 +32,6 @@ class PlanetAPI extends RESTDataSource {
 		} while (count < 10 && url);
 
 		return listPlanets;
-	}
-
-	async isValidPlanet({ name }) {
-		const response = await this.get('/exoplanets/', { name });
-
-		if (Array.isArray(response.results)) {
-			const planets = response.results.filter(planet => {
-				return planet.mass !== null && planet.mass.value > 25.0;
-			});
-
-			return planets[0] ? true : false;
-		}
-		return false;
 	}
 
 	planetReducer(planet) {
