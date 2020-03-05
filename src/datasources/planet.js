@@ -4,20 +4,32 @@ const { Station } = require('../database/models');
 class PlanetAPI extends RESTDataSource {
 	constructor() {
 		super();
-		this.baseURL = 'https://api.arcsecond.io';
+		this.baseURL = '';
 	}
 
 	async getAllPlanets() {
-		const response = await this.get('/exoplanets/');
+		let count = 1;
+		let url = 'https://api.arcsecond.io/exoplanets/';
+		let listPlanets = [];
+		do {
+			const response = await this.get(url);
 
-		if (Array.isArray(response.results)) {
-			const planets = response.results.filter(planet => {
-				return planet.mass !== null && planet.mass.value > 25.0;
-			});
+			if (Array.isArray(response.results)) {
+				url = response.next;
+				const planets = response.results.filter(planet => {
+					return planet.mass !== null && planet.mass.value > 25.0;
+				});
+				listPlanets = listPlanets.concat(
+					planets.map(planet => this.planetReducer(planet))
+				);
+			} else {
+				return listPlanets;
+			}
 
-			return planets.map(planet => this.planetReducer(planet));
-		}
-		return [];
+			count++;
+		} while (count < 10 && url);
+
+		return listPlanets;
 	}
 
 	async isValidPlanet({ name }) {

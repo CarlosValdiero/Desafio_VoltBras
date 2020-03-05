@@ -19,7 +19,10 @@ module.exports = {
 	Mutation: {
 		installStation: async (_, args) => {
 			try {
-				let response = await Station.create(args);
+				response = await Station.findOne(args);
+				if (!response) {
+					response = await Station.create(args);
+				}
 				return response;
 			} catch (e) {
 				console.log(e.message);

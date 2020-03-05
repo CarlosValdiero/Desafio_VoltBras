@@ -17,13 +17,13 @@ Clone o repositorio do projeto:
 $ git clone https://github.com/CarlosValdiero/Desafio_VoltBras.git
 ```
 
-instale as dependências:
+Instale as dependências:
 
 ```
 $ yarn install ou npm install
 ```
 
-crie um arquivo .env e adicione a url do mongoDB, no meu caso estou usando o banco no MongoDB Atlas:
+Crie um arquivo .env e adicione a url do mongoDB, no meu caso estou usando o banco no MongoDB Atlas:
 
 ```
 DATABASE_CONNECTION_STRING =
@@ -81,4 +81,4 @@ mutation installStation {
 -   [ ] Usar Typescript
 -   [ ] Coloque um docker-compose, que simplifique rodar o seu servidor e o DB
 -   [ ] Usamos [prisma](prisma.io) mas sinta-se livre para usar qualquer ORM
--   [ ] Como o dado da [Arcsecond] vem páginado, tente pegar mais de uma página(e.g. 10 páginas)
+-   [x] Como o dado da [Arcsecond] vem páginado, tente pegar mais de uma página(e.g. 10 páginas)
